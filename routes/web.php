@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,10 +22,7 @@ Route::get('/', function () {
   // return 'monica'; 
 });
 
-
-Route::get('/test', function () {
-    $allNames=['monica', 'ashraf' , 'refaat'];
-    return view('test',[
-        'names' => $allNames,
-    ]);//1st parameter:"view",2nd parameter "data" :array[] ---> ('key' of foreach in view => value variable name of array)
- });
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
+Route::post('/posts', [PostController::class,'store'])->name('posts.store');
+Route::get('/posts/{post}', [PostController::class,'show'])->name('posts.show');
