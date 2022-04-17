@@ -29,6 +29,12 @@ class PostController extends Controller
     }
 
     public function show($postId){
-      return $postId;
+      $posts=[
+        ['id' =>1, 'title' => 'Laravel', 'post_creator' =>'monica', 'created_at' =>'2022-04-16 2:10:00'],
+        ['id' =>2, 'title' => 'Php', 'post_creator' =>'asmaa', 'created_at' =>'2022-04-16 3:10:00'],
+        ['id' =>3, 'title' => 'Java', 'post_creator' =>'hadeer', 'created_at' =>'2022-04-16 4:10:00']
+      ];
+
+    return view('posts.show',['post'=> $posts[$postId-1]]);
     }
 }
