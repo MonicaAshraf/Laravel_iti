@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\User;
 class PostController extends Controller
 {
     public function index()
@@ -32,12 +33,30 @@ class PostController extends Controller
          ]);//1st parameter:"view",2nd parameter "data" :array[] ---> ('key' of foreach in view => value variable name of array)
     }
 
-    public function create(){
-      return view('posts.create');
+    public function create()
+    {
+      $users = User::all();
+      //dd($users);
+      return view('posts.create', ['users'=> $users]);
     }
 
-    public function store(){
-      return 'we are in the process of storing';
+    public function store()
+    {
+      //get the request data 
+         // $data = $_POST;
+         $data = request()->all(); //global helper method == $_POST , return array
+       //dd($data);
+
+      //store the request data into the database
+        // insert into posts ('hello')
+        Post::create([
+          'title' => $data['title'],
+          'description' => $data['description'],
+        ]);
+
+
+      //redirection to /posts  
+      return redirect()->route('posts.index');//take alias name
     }
 
     public function show($postId){
@@ -56,7 +75,7 @@ class PostController extends Controller
     // dd($post);//return object of Eloquent\Post
 
     $post = Post::find($postId);//shorthand way
-    dd($post);
+    //dd($post);
 
    // return view('posts.show',['post'=> $posts[$postId-1]]);
     }
