@@ -17,13 +17,21 @@
               </tr>
             </thead>
             <tbody>
-              <!-- dd   $posts=>contains object of collation -->
+              <!-- dd   $posts  =>contains object of collation -->
             @foreach ( $posts as $post)  
-            <!-- dd    $post=>contains object of Post  -->
+            <!-- dd    $post  =>contains object of Post  -->
+
+            <!-- after create join relation  : -->
+             <!-- dd $post->user => return object of user model -->
+                 <!-- then we can reach to the user data by using this object : such as name -->
+                      <!-- dd $post->user->name => return user name -->
+              <!-- wrong naming function to solve it use foreignkey -->
+                 <!-- dd $post->someTest => return null before foreignkey      -->
+
               <tr>
                 <td>{{ $post['id'] }}</th> <!-- //we can acceess object as an array in laravel by magic method -->
                 <td>{{ $post->title }}</td>
-                <td>{{ $post->post_creator }}</td>
+                <td>{{ $post->user ? $post->user->name : 'Not found' }}</td>
                 <td>{{ $post->created_at}}</td>
                 <td>
                     <a href="{{ route('posts.show', ['post' => $post->id ]) }}" class="btn btn-info">View</a>
