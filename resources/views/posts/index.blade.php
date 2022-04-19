@@ -32,11 +32,15 @@
                 <td>{{ $post['id'] }}</th> <!-- //we can acceess object as an array in laravel by magic method -->
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->user ? $post->user->name : 'Not found' }}</td>
-                <td>{{ $post->created_at}}</td>
+                <td>{{ $post->created_at->format('Y-m-d') }}</td>
                 <td>
                     <a href="{{ route('posts.show', ['post' => $post->id ]) }}" class="btn btn-info">View</a>
                     <a href="{{ route('posts.edit', ['post' => $post['id']]) }}" class="btn btn-primary">Edit</a>
-                    <a href="#" class="btn btn-danger">Delete</a>
+                    <form method="post" action="{{ route('posts.destroy', ['post' => $post['id']]) }}">
+                      @csrf
+                      @method('delete')
+                      <button type="submit" class="btn btn-danger"  onclick="return confirm('Are you sure for Delete?')">Delete</button>
+                    </form>
                 </td>
               </tr>
               @endforeach

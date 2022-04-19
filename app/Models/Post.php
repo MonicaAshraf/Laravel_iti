@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+//ORM => Object Relation Mapping/Mapper
 class Post extends Model
 {
     use HasFactory;
@@ -13,6 +14,7 @@ class Post extends Model
         'title',
         'description',
         'user_id',
+       
     ];
 
 

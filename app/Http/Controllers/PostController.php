@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
+use Carbon\Carbon;
+use DB;
 class PostController extends Controller
 {
     public function index()
@@ -41,11 +43,24 @@ class PostController extends Controller
     }
 
     public function store()
-    {
+    {   
+     // $dt= Carbon::now();
+     // $createTime=$dt->toDateString();
+      
+      //$dt = new Carbon('2012-01-31');
+     //$dt->roundUnit('month', 2)->format('Y-m-d');  // 2012-03-01
+
+
+    
+
       //get the request data 
          // $data = $_POST;
          $data = request()->all(); //global helper method == $_POST , return array
-       //dd($data);
+      //  dd($data);
+
+
+      //  $createdAt = Carbon::parse();
+      //  $dt=$createdAt->format('M d Y');
 
       //store the request data into the database
         // insert into posts ('hello')
@@ -53,6 +68,8 @@ class PostController extends Controller
           'title' => $data['title'],
           'description' => $data['description'],
           'user_id' => $data['postCreator'],
+        
+
         ]);
 
 
@@ -76,13 +93,14 @@ class PostController extends Controller
     // dd($post);//return object of Eloquent\Post
 
     $post = Post::find($postId);//shorthand way
-    //dd($post);
+    // dd($post);
 
-   // return view('posts.show',['post'=> $posts[$postId-1]]);
+   return view('posts.show',['post'=> $post]);
     }
 
 
-    public function edit($postId){
+    public function edit($postId)
+    {
       $posts=[
         ['id' =>1, 'title' => 'Laravel', 'post_creator' =>'monica', 'created_at' =>'2022-04-16 2:10:00'],
         ['id' =>2, 'title' => 'Php', 'post_creator' =>'asmaa', 'created_at' =>'2022-04-16 3:10:00'],
@@ -92,7 +110,19 @@ class PostController extends Controller
     }
 
 
-    public function update($postId){
+    public function update($postId)
+    {
       return view('posts.update');
+    }
+
+    public function destroy($postId)
+    {
+      $rowDeleted = Post::find($postId)->delete();
+     // DB::delete('delete from student_details where id = ?',[$postId]);
+     return redirect()->route('posts.index');
+
+      // $user = Post::where('id', $postId)->firstorfail()->delete();
+      //     echo ("User Record deleted successfully.");
+      //     return redirect()->route('posts.index');
     }
 }

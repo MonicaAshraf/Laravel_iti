@@ -17,8 +17,8 @@
               <tr align="center">
                 <td>{{ $post['id'] }}</td>
                 <td>{{ $post['title'] }}</td>
-                <td>{{ $post['post_creator'] }}</td>
-                <td>{{ $post['created_at'] }}</td>
+                <td>{{ $post->user ? $post->user->name : 'Not found' }}</td>
+                <td>{{ $post['created_at']->format('Y-m-d') }}</td>
               </tr>
              
             </tbody>
