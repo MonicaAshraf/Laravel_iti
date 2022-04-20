@@ -28,15 +28,15 @@
               <!-- wrong naming function to solve it use foreignkey -->
                  <!-- dd $post->someTest => return null before foreignkey      -->
 
-              <tr>
+              <tr >
                 <td>{{ $post['id'] }}</th> <!-- //we can acceess object as an array in laravel by magic method -->
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->user ? $post->user->name : 'Not found' }}</td>
                 <td>{{ $post->created_at->format('Y-m-d') }}</td>
-                <td>
+                <td >
                     <a href="{{ route('posts.show', ['post' => $post->id ]) }}" class="btn btn-info">View</a>
                     <a href="{{ route('posts.edit', ['post' => $post['id']]) }}" class="btn btn-primary">Edit</a>
-                    <form method="post" action="{{ route('posts.destroy', ['post' => $post['id']]) }}">
+                    <form method="post" action="{{ route('posts.destroy', ['post' => $post['id']]) }}" style= "display:inline-block">
                       @csrf
                       @method('delete')
                       <button type="submit" class="btn btn-danger"  onclick="return confirm('Are you sure for Delete?')">Delete</button>

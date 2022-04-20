@@ -17,9 +17,14 @@
 
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Post Creator</label>
-                <select class="form-control">
+                <!-- <select class="form-control">
                     <option value="1">Ahmed</option>
                     <option value="2">Mohamed</option>
+                </select> -->
+                <select name="postCreator" id="exampleFormControl" class="form-control">
+                  
+                       <option>{{$post->user->name}}</option>
+                  
 
                 </select>
             </div>
