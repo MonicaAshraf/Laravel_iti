@@ -124,4 +124,13 @@ class PostController extends Controller
       return redirect()->back();
 
     }
+
+
+
+//Pagination function
+    public function page()
+    {
+      $data=Post::paginate(100);
+      return view('list',['posts'=>$data]);
+    }
 }
