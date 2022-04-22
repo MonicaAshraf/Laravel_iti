@@ -31,3 +31,6 @@ Route::put('/posts/{post}', [PostController::class,'update'])->name('posts.updat
 Route::delete('/posts/{post}', [PostController::class,'destroy'])->name('posts.destroy');
 Route::get('list', [PostController::class,'page']);
 Route::post('/posts/comment/{postId}',[PostController::class,'addComment'])->name('create.comment');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
