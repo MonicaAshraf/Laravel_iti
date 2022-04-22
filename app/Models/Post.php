@@ -36,4 +36,10 @@ class Post extends Model
     //     //function name must be related to the foreign key name
     //     return $this->belongsTo(User::class ,'user_id');
     // }
+
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
 }

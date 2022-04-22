@@ -94,8 +94,10 @@ class PostController extends Controller
 
     $post = Post::find($postId);//shorthand way
     // dd($post);
-
-   return view('posts.show',['post'=> $post]);
+      $users=User::all();
+    $comments=$post->comments->all();
+    //dd($comments);
+   return view('posts.show',['post'=> $post,'comments'=>$comments,'users'=>$users]);
     }
 
 
@@ -132,5 +134,22 @@ class PostController extends Controller
     {
       $data=Post::paginate(100);
       return view('list',['posts'=>$data]);
+    }
+
+
+    public function addComment(Request $request,$postId){
+
+      $post=Post::find($postId);
+     
+      $comment=$post->comments()->create([
+          'commentContent'=>$request->input('comment'),
+          'user_id'=>$request->input('postCreator'),
+      ]);
+     if($comment){
+      return redirect()->back()->with(['success'=>'Comment is added successfully']);
+     }else{
+      return redirect()->back()->with(['error'=>'Comment failed to add']);
+     }
+      
     }
 }
