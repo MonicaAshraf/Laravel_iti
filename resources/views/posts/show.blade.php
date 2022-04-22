@@ -40,7 +40,7 @@
                     <tr >
                       <td>{{ $comment->user->email }}</td>
                       <td>{{ $comment['commentContent'] }}</td> 
-                      <td>{{ $comment->created_at }}</td>
+                      <td>{{ $comment->created_at->format('Y-m-d') }}</td>
                     </tr>
                   @endforeach
             </tbody>

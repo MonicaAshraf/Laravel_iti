@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
-use DB;
+use App\Http\Requests\StorePostRequest;
 class PostController extends Controller
 {
     public function index()
@@ -42,7 +42,7 @@ class PostController extends Controller
       return view('posts.create', ['users'=> $users]);
     }
 
-    public function store()
+    public function store(StorePostRequest $request)//object from StorePostRequest , called type hinting 
     {   
      // $dt= Carbon::now();
      // $createTime=$dt->toDateString();
@@ -51,7 +51,13 @@ class PostController extends Controller
      //$dt->roundUnit('month', 2)->format('Y-m-d');  // 2012-03-01
 
 
-    
+  // request()->validate([
+  //   'title' =>['required' , 'min:3'],
+  //   'description' =>['required', 'min:5'],
+  // ],[
+  //   'title.required' =>'My Customized Message' ,
+  //   'title.min'=>'My Customizing the min rules',
+  // ]);
 
       //get the request data 
          // $data = $_POST;

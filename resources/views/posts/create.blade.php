@@ -3,6 +3,10 @@
 @section('title')Create @endsection
 
 @section('content')
+
+
+
+
         <form method="POST" action="{{ route('posts.store')}}">
             @csrf
             <div class="mb-3">
