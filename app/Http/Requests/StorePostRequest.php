@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Validation\Rule;
 class StorePostRequest extends FormRequest
 {
     /**
@@ -25,8 +25,9 @@ class StorePostRequest extends FormRequest
     {
         return [
            
-                'title' =>['required' , 'min:3'],
-                'description' =>['required', 'min:5'],
+                'title' =>['required' , 'min:3' , Rule::unique('posts','title')->ignore($this->post)],
+                'description' =>['required', 'min:10'],
+              
             
         ];
     }
@@ -34,8 +35,13 @@ class StorePostRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' =>'My Customized Message' ,
-            'title.min'=>'My Customizing the min rules',
+            'title.required' =>'title is required', 
+            'title.min'=>'title must be at least 3 characters',
+            'title.unique' => 'title must be unique',
+            'description.required'=>'description is required',
+            'description.min'=> 'description must be at least 10 characters' ,
+            
         ];
     }
 }
+  

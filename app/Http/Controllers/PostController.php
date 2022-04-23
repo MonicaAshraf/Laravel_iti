@@ -70,17 +70,24 @@ class PostController extends Controller
 
       //store the request data into the database
         // insert into posts ('hello')
-        Post::create([
+
+        
+         $user_id=$data['postCreator'];
+         $allUsers=User::find($user_id);
+         //dd( $allUsers);        
+        if($allUsers != null){
+           Post::create([
           'title' => $data['title'],
           'description' => $data['description'],
           'user_id' => $data['postCreator'],
-        
-
         ]);
-
-
       //redirection to /posts  
       return redirect()->route('posts.index');//take alias name
+
+        }//end_if
+        else{
+          return 'User not exist';
+        }
     }
 
     public function show($postId){
@@ -116,14 +123,20 @@ class PostController extends Controller
       // ];
 
       $post = Post::find($postId);
-      //dd($post);
+      //dd($post , 'in edit ');
       return view('posts.edit',['post'=> $post]);
     }
 
 
-    public function update($postId)
+    public function update(StorePostRequest $request ,$postId)
     {
-      return view('posts.update');
+      $oldData = Post::find($postId); 
+      $newData = request()->all();
+      $oldData->title =$newData['title'];
+      $oldData->description =$newData['description'];
+      $oldData->save();
+      //dd($oldData , 'in update ' , $postId);
+      return view('posts.update',['oldData'=>$oldData]);
     }
 
     public function destroy($postId)
