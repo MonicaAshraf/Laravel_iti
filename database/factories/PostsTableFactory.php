@@ -17,11 +17,14 @@ class PostsTableFactory extends Factory
     protected $model = Post::class;
 
     public function definition()
-    {
+    {       $title =  $this->faker->text(20);
         return [
-            'title' =>  $this->faker->sentence(5),
+           
+            'slug' => Str::slug($title),
+            'title' =>$title,
             'description' =>  $this->faker->sentence(15),
             'user_id' => \App\Models\User::all()->random()->id,
+            
         ];
     }
 }

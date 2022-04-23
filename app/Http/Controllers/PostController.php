@@ -7,6 +7,8 @@ use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
 use App\Http\Requests\StorePostRequest;
+use Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Support\Str;
 class PostController extends Controller
 {
     public function index()
@@ -80,6 +82,9 @@ class PostController extends Controller
           'title' => $data['title'],
           'description' => $data['description'],
           'user_id' => $data['postCreator'],
+          // 'slug' => SlugService::createSlug(Post::class ,'slug' , $request->title)
+          'slug' =>Str::slug($request->input('title')),
+          
         ]);
       //redirection to /posts  
       return redirect()->route('posts.index');//take alias name

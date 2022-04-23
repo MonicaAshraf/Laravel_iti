@@ -19,6 +19,7 @@ class CreatePostsTable extends Migration
             $table->id();// == unsigned big integer column + auto increment
             $table->string('title');// == varchar column
             $table->text('description');// == text column
+            $table->string('slug');
             $table->timestamps();
         });
     }
