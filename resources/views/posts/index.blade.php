@@ -12,6 +12,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
                 <th scope="col">Slug</th>
+                <!-- <th scope="col">Image</th> -->
                 <th scope="col">Posted By</th>
                 <th scope="col">Created At</th>
                 <th scope="col">Actions</th>
@@ -33,6 +34,7 @@
                 <td>{{ $post['id'] }}</th> <!-- //we can acceess object as an array in laravel by magic method -->
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->slug }}</td>
+                <!-- <td>{{ $post->image }}</td> -->
                 <td>{{ $post->user ? $post->user->name : 'Not found' }}</td>
                 <td>{{ $post->created_at->format('Y-m-d') }}</td>
                 <td >

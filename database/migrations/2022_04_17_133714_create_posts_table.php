@@ -20,6 +20,7 @@ class CreatePostsTable extends Migration
             $table->string('title');// == varchar column
             $table->text('description');// == text column
             $table->string('slug');
+            // $table->string('image_path');
             $table->timestamps();
         });
     }

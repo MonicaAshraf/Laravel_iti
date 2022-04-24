@@ -15,6 +15,7 @@ class Post extends Model
         'description',
         'user_id',
         'slug',
+        // 'image_path',
        
     ];
 
@@ -52,6 +53,11 @@ class Post extends Model
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
+
+
+    // public function getImageAttribute(){
+    //     return asset('storage/' . $this->image_path);
+    // }
 
 
    
