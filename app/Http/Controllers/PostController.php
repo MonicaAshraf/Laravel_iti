@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use App\Http\Requests\StorePostRequest;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Str;
+use App\Jobs\PruneOldPostsJob;
 class PostController extends Controller
 {
     public function index()
@@ -31,6 +32,8 @@ class PostController extends Controller
     $filteredPosts=Post::where('title','java')->get();//get() --> represent end of query
     //dd($filteredPosts);//return object of Eloquent\Collection
 
+
+    PruneOldPostsJob::dispatch();
 
        return view('posts.index',[
          'posts' => $posts,
@@ -148,6 +151,9 @@ class PostController extends Controller
     {
       $rowDeleted = Post::find($postId)->delete();
       return redirect()->back();
+
+     
+        //return redirect()->back()->with(['success'=>'Posts deleted successfully']);
 
     }
 

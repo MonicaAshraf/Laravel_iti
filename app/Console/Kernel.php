@@ -4,7 +4,9 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-
+use App\Models\Post;
+use Carbon\Carbon;
+use App\Jobs\PruneOldPostsJob;
 class Kernel extends ConsoleKernel
 {
     /**
@@ -16,6 +18,13 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+
+        // $schedule->call(function () {
+        //     $dateOldertwoYears=Carbon::now()->subYears(2)->toDateTimeString();
+        //     $oldPosts=Post::where('created_at','<=',$dateOldertwoYears)->delete();
+        // })->daily();
+
+        $schedule->job(new PruneOldPostsJob)->dailyAt('12:00');
     }
 
     /**
