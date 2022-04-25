@@ -37,4 +37,17 @@ Route::post('/posts/comment/{postId}',[PostController::class,'addComment'])->nam
 
 Auth::routes();
 
+
+use Laravel\Socialite\Facades\Socialite;
+ 
+Route::get('/auth/redirect', function () {
+    return Socialite::driver('github')->redirect();
+})->name('github.auth');
+ 
+Route::get('/auth/callback', function () {
+    $user = Socialite::driver('github')->user();
+ dd($user);
+    // $user->token
+});
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
